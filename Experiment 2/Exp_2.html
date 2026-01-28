@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Job Portal</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<h1>Job Portal</h1>
+<p class="greet">Welcome to the Job Portal</p>
+<p class="greet">Find your Dream Job</p>
+<div class="box">
+    <h2>Search Job</h2>
+    <label>Name</label>
+    <input type="text" placeholder="Enter your name">
+    <label>Qualification</label>
+    <input type="text" placeholder="Enter qualification">
+    <label>Contact Number</label>
+    <input type="text" placeholder="Enter contact number">
+    <label>Job Title</label>
+    <input type="text" id="jobInput" list="jobtitles" placeholder="Select job title">
+    <datalist id="jobtitles">
+        <option value="Software Developer">
+        <option value="Data Analyst">
+        <option value="System Engineer">
+        <option value="Backend Developer">
+        <option value="Business Analyst">
+    </datalist>
+    <input type="submit" value="Search Job" onclick="searchJob()">
+</div>
+<h2>Suggested Jobs</h2>
+<p id="msg" class="message"></p>
+<table id="jobTable">
+    <tr>
+        <th>Company</th>
+        <th>Role</th>
+        <th>Location</th>
+    </tr>
+    <tr data-role="Software Developer">
+        <td>TCS</td>
+        <td>Software Developer</td>
+        <td>Bangalore</td>
+    </tr>
+    <tr data-role="Data Analyst">
+        <td>Infosys</td>
+        <td>Data Analyst</td>
+        <td>Pune</td>
+    </tr>
+    <tr data-role="System Engineer">
+        <td>Wipro</td>
+        <td>System Engineer</td>
+        <td>Hyderabad</td>
+    </tr>
+    <tr data-role="Business Analyst">
+        <td>Accenture</td>
+        <td>Business Analyst</td>
+        <td>Gurgaon</td>
+    </tr>
+    <tr data-role="Backend Developer">
+        <td>IBM</td>
+        <td>Backend Developer</td>
+        <td>Bangalore</td>
+    </tr>
+</table>
+<script>
+function searchJob(){
+    var input = document.getElementById("jobInput").value.toLowerCase();
+    var table = document.getElementById("jobTable");
+    var rows = table.getElementsByTagName("tr");
+    var found = false;
+    for(var i = 1; i < rows.length; i++){
+        var role = rows[i].getAttribute("data-role").toLowerCase();
+        if(role.includes(input) && input !== ""){
+            rows[i].style.display = "";
+            found = true;
+        } else {
+            rows[i].style.display = "none";
+        }
+    }
+    table.style.display = "table";
+    document.getElementById("msg").innerText = found ? "" : "No jobs found!";
+}
+</script>
+</body>
+</html>
